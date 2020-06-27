@@ -1,5 +1,6 @@
 html, body, section, .full-height {
     height: 100%;
+    font-size: 24pt;
 }
 
 #pad {
@@ -11,6 +12,8 @@ html, body, section, .full-height {
     resize: none;
     width: 50%;
     float: left;
+    white-space: pre-wrap;
+
 
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
@@ -18,7 +21,10 @@ html, body, section, .full-height {
 }
 
 #output {
+    border: none;
     overflow: auto;
+    outline: none;
+    resize: none;
     border-left: 1px solid black;
     width: 50%;
     float: right;
