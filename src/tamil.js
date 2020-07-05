@@ -7,11 +7,19 @@ const table = {
         "unicode": "\u0b86",
         "concat": "\u0bbe"
     },
+    "A": {
+        "unicode": "\u0b86",
+        "concat": "\u0bbe"
+    },
     "i": {
         "unicode": "\u0b87",
         "concat": "\u0bbf"
     },
     "ii": {
+        "unicode": "\u0b88",
+        "concat": "\u0bc0"
+    },
+    "I": {
         "unicode": "\u0b88",
         "concat": "\u0bc0"
     },
@@ -23,11 +31,19 @@ const table = {
         "unicode": "\u0b8a",
         "concat": "\u0bc2"
     },
+    "U": {
+        "unicode": "\u0b8a",
+        "concat": "\u0bc2"
+    },
     "e": {
         "unicode": "\u0b8e",
         "concat": "\u0bc6"
     },
     "ee": {
+        "unicode": "\u0b8f",
+        "concat": "\u0bc7"
+    },
+    "E": {
         "unicode": "\u0b8f",
         "concat": "\u0bc7"
     },
@@ -43,11 +59,15 @@ const table = {
         "unicode": "\u0b93",
         "concat": "\u0bcb"
     },
+    "O": {
+        "unicode": "\u0b93",
+        "concat": "\u0bcb"
+    },
     "au": {
         "unicode": "\u0b94",
         "concat": "\u0bcc"
     },
-    ".": {
+    "-": {
         "unicode": "\u0b83",
         "concat": "\u0bcd"
     },
