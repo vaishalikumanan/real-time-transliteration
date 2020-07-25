@@ -1,3 +1,10 @@
+const Character = {
+    VOWEL: 1,
+    CONSONANT: 2,
+    OTHER: 3
+};
+Object.freeze(Character);
+
 const transliterate = (text) => { 
     var lines = text.split('\n');
     var tamilText = lines.map((line) => {
@@ -12,7 +19,7 @@ const transliterateWord = (word) => {
     var tamilWord = '';
     var pos = 0;
     var i = 2;
-    var prevConsonant = false;
+    var prev = Character.OTHER;
     var inTable = false;
 
     if (word[0] === 'n') {
@@ -22,17 +29,18 @@ const transliterateWord = (word) => {
     while (i >= 0 && pos < word.length) {
         var substr = word.substr(pos, i);
         var letter = substr;
+        var curr = Character.OTHER;
         inTable = substr in table;
 
         if (inTable) {
-            var isConsonant = !table[substr].hasOwnProperty('concat');
-            letter = (prevConsonant && !isConsonant ) ? table[substr].concat : table[substr].unicode;
+            curr = table[substr].hasOwnProperty('concat') ? Character.VOWEL : Character.CONSONANT;
+            letter = (prev === Character.CONSONANT && curr !== Character.CONSONANT ) ? table[substr].concat : table[substr].unicode;
 
-            if (isConsonant && prevConsonant) {
+            if (curr === Character.CONSONANT && prev === Character.CONSONANT) {
                 letter = table['-'].concat + letter;
             }
             
-            if (isConsonant && pos + i > word.length - 1) {
+            if (curr === Character.CONSONANT && pos + i > word.length - 1) {
                 letter += table['-'].concat;
             } 
  
@@ -43,10 +51,14 @@ const transliterateWord = (word) => {
         }
 
         if (i === 0){
+            if (prev === Character.CONSONANT && curr === Character.OTHER) {
+                letter = table['-'].concat + letter;
+            }
+            
             tamilWord += letter;
             pos += substr.length;
             i = 2;
-            prevConsonant = inTable ? isConsonant : false;
+            prev = curr;
         }
     }
 
