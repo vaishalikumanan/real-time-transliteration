@@ -5,8 +5,11 @@ const Character = {
 };
 Object.freeze(Character);
 
+var ignore = false;
+
 const transliterate = (text) => { 
     var lines = text.split('\n');
+    ignore = false;
     var tamilText = lines.map((line) => {
         var englishStrings = line.split(' ');
         var tamilStrings = englishStrings.map(transliterateWord);
@@ -32,7 +35,7 @@ const transliterateWord = (word) => {
         var curr = Character.OTHER;
         inTable = substr in table;
 
-        if (inTable) {
+        if (!ignore && inTable) {
             curr = table[substr].hasOwnProperty('concat') ? Character.VOWEL : Character.CONSONANT;
             letter = (prev === Character.CONSONANT && curr !== Character.CONSONANT ) ? table[substr].concat : table[substr].unicode;
 
@@ -44,6 +47,15 @@ const transliterateWord = (word) => {
                 letter += table['-'].concat;
             } 
  
+            i = 0;
+        }
+        else if (substr === '\\\\') {
+            letter = '\\';
+            i = 0;
+        }
+        else if (substr === '\\') {
+            letter = '';
+            ignore = !ignore;
             i = 0;
         }
         else {
@@ -61,6 +73,5 @@ const transliterateWord = (word) => {
             prev = curr;
         }
     }
-
     return tamilWord;
 }
